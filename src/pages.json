@@ -20,7 +20,7 @@
     {
       "path": "pages/index/index",
       "style": {
-        "navigationStyle": "custom"
+        "navigationBarTitleText": "首页"
       }
     },
     {
@@ -59,7 +59,7 @@
     {
       "path": "pages/document/index",
       "style": {
-        "navigationStyle": "custom"
+        "navigationBarTitleText": "文档"
       }
     },
     {
@@ -384,13 +384,25 @@
           "softinputMode": "adjustResize"
         }
       }
+    },
+    {
+      "path": "pages/picTransform/picTransform",
+      "style": {
+        "navigationBarTitleText": "图片转换"
+      }
+    },
+    {
+      "path": "pages/pdfTransform/pdfTransform",
+      "style": {
+        "navigationBarTitleText": "PDF转换"
+      }
     }
   ],
   "globalStyle": {
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "uni-app",
-    "navigationBarBackgroundColor": "#F8F8F8",
-    "backgroundColor": "#F8F8F8"
+    "navigationBarBackgroundColor": "#ffffff",
+    "backgroundColor": "#ffffff"
   },
   "tabBar": {
     "color": "rgba(51, 51, 51, 1)",

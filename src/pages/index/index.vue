@@ -3,61 +3,80 @@
     <view class="index-header"></view>
 
     <view class="box">
-      <view class="search-box">
-        <input v-model="keyword" placeholder="输入文档名称" placeholder-style="font-style: italic;" type="text" />
-        <image class="icon" mode="widthFix" @click="search" src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/index/search-icon.png"/>
-      </view>
+      <view class="grid">
+        <view class="grid-title">
+          <text></text>
+          <text>轻松扫描，高效管理每一份文件</text>
+        </view>
 
-      <view class="tools1">
-        <image @click="toRouter('/pages/camera/index', 'tab=6')" class="icon" mode="widthFix" src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/index/tool-icon1.png"/>
-        <image @click="show = true" class="icon" mode="widthFix" src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/index/tool-icon2.png"/>
+        <view class="scan-icon">
+          <image
+              class="icon1"
+              mode="widthFix"
+              src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/index/icon01.png"
+          />
+
+          <view class="tip">
+            <view>点击按钮即可立即扫描</view>
+            <view>证件、文件、图片、pdf、文字提取等</view>
+          </view>
+
+          <image
+              @click="toRouter('/pages/camera/index', 'tab=4')"
+              class="btn"
+              mode="widthFix"
+              src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/index/btn01.png"
+          />
+        </view>
       </view>
 
       <view class="index-card">
-        <view>
+        <view class="tools">
+          <view class="tools-title">常用工具</view>
+
           <view class="card-grid">
-            <view @click="toRouter('/pages/camera/index', 'tab=4')">
+            <view class="card-grid-wrapper" @click="toRouter('/pages/camera/index', 'tab=5')">
               <view class="card-grid_li">
                 <wd-img
-                    height="40"
+                    height="27"
                     mode="heightFix"
-                    src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/index/icon1.png"
+                    src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/index/icon02.png"
                 ></wd-img>
               </view>
-              <view class="span">证件扫描</view>
+              <view class="span"> 提取文字 </view>
             </view>
 
-            <view @click="toRouter('/pages/camera/index', 'tab=5')">
+            <view class="card-grid-wrapper" @click="$toRouter('/pages/picTransform/picTransform')">
               <view class="card-grid_li">
                 <wd-img
-                    height="40"
+                    height="27"
                     mode="heightFix"
-                    src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/index/icon2.png"
+                    src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/index/icon03.png"
                 ></wd-img>
               </view>
-              <view class="span">文字提取</view>
+              <view class="span"> 图片转换 </view>
             </view>
 
-            <view @click="pdfShow = true">
+            <view class="card-grid-wrapper" @click="$toRouter('/pages/pdfTransform/pdfTransform')">
               <view class="card-grid_li">
                 <wd-img
-                    height="40"
+                    height="27"
                     mode="heightFix"
-                    src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/index/icon3.png"
+                    src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/index/icon04.png"
                 ></wd-img>
               </view>
-              <view class="span">PDF转换</view>
+              <view class="span"> PDF转换 </view>
             </view>
 
-            <view @click="toRouter('/pages/camera/index', 'tab=9')">
+            <view class="card-grid-wrapper" @click="toSwich('/pages/tool/index')">
               <view class="card-grid_li">
                 <wd-img
-                    height="40"
+                    height="27"
                     mode="heightFix"
-                    src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/index/icon4.png"
+                    src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/index/icon05.png"
                 ></wd-img>
               </view>
-              <view class="span">拍照翻译</view>
+              <view class="span"> 更多 </view>
             </view>
           </view>
         </view>
@@ -67,23 +86,13 @@
 
   <view class="index-content" style="position: relative; z-index: 10">
     <view class="file-list-wrapper">
-      <view class="card-title1">
-        <view class="tip">· 快速导入使用扫描 ·</view>
-
-        <view class="options">
-          <view class="option-item" @click="choosePDFFile">
-            <image class="icon" mode="widthFix" src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/index/icon5.png"/>
-            <text>文档导入</text>
-          </view>
-
-          <view class="option-item" @click="chooseLocalPicture">
-            <image class="icon" mode="widthFix" src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/index/icon6.png"/>
-            <text>相册导入</text>
-          </view>
+      <view class="card-top">
+        <view class="tool-title">
+          <text class="title-word">最近文档</text>
         </view>
-      </view>
 
-      <view v-if="files.length && user.uid" class="recent-title">最近文件</view>
+        <view class="more" @click="toSwich('/pages/document/index')">查看更多 〉</view>
+      </view>
 
       <view class="card-content">
         <view
@@ -93,7 +102,28 @@
             :key="index"
             @click="goPreview(item)"
         >
-          <view class="left">
+          <view
+              @click.stop="(tindex = (tindex === item.id ? -1 : item.id)), (currentItem = (currentItem === item ? null : item))"
+              class="doc-more"
+          >
+            <view class="more-dot" v-if="tindex === item.id"></view>
+            <view class="more-dot1" v-else></view>
+          </view>
+
+          <view class="left" :style="{ justifyContent: 'center', gap: '12rpx' }">
+            <view class="filename">
+              {{ item.file_name }}
+            </view>
+
+            <view
+                class="time"
+                v-if="item.create_at"
+            >
+              <text>更新时间：{{ item.create_at }}</text>
+            </view>
+          </view>
+
+          <view class="right">
             <image
                 v-if="
                             item.file_name.includes('.') &&
@@ -107,27 +137,6 @@
             <wd-icon v-else-if="/\.(ppt|pptx)$/i.test(item.file_name)" class-prefix="icon" custom-class="iconfont" name="ppt" size="60" color="#FF3E4C"></wd-icon>
             <wd-icon v-else-if="/\.(pdf)$/i.test(item.file_name)" class-prefix="icon" custom-class="iconfont" name="pdf" size="60" color="#FF3E4C"></wd-icon>
           </view>
-
-          <view class="right" :style="{ justifyContent: 'center', gap: '12rpx' }">
-            <view class="filename">
-              {{ item.file_name }}
-            </view>
-
-            <view
-                class="time"
-                v-if="item.create_at"
-            >
-              <text>{{ item.create_at }}</text>
-            </view>
-          </view>
-
-          <view
-              @click.stop="(tindex = (tindex === item.id ? -1 : item.id)), (currentItem = (currentItem === item ? null : item))"
-              class="doc-more"
-          >
-            <view class="more-dot" v-if="tindex === item.id"></view>
-            <view class="more-dot1" v-else></view>
-          </view>
         </view>
 
         <view class="empty" v-if="files.length === 0 || !user.uid">
@@ -135,21 +144,11 @@
             <image
                 class="empty-icon"
                 mode="widthFix"
-                src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/index/empty.png"
+                src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/index/empty.png"
             />
 
-            <view class="login-box" v-if="!user.uid">
-              <view class="tip">登录扫描账号，查看账号内同步文档</view>
-              <view class="login" @click="toRouter('/pages/login/index')">登录</view>
-            </view>
-
-            <view class="add-box" v-else>
-              <view class="tip" style="margin-bottom: 43rpx">暂无记录，点击按钮开始扫描</view>
-              <image
-                  class="icon1"
-                  mode="widthFix"
-                  src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/index/icon7.png"
-              />
+            <view class="add-box">
+              <view class="tip">暂无文档</view>
             </view>
           </view>
         </view>
@@ -158,75 +157,71 @@
   </view>
 
   <view class="select-options" v-if="selectFile">
-    <view class="select-options-container" v-if="!showEditFileDialog">
+    <view class="select-options-container">
       <view @click.stop="showEditFileDialog = true" class="select-option">
         <image
             mode="widthFix"
-            src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/index/icon9.png"
+            src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/index/option02.png"
         />
 
         <view>编辑</view>
       </view>
-      <view @click.stop="toShareFile(selectFile)" class="select-option">
-        <image
-            mode="widthFix"
-            src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/index/icon10.png"
-        />
 
-        <view>分享</view>
-      </view>
       <view @click.stop="showDeleteDialog = true" class="select-option">
         <image
             mode="widthFix"
-            src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/index/icon11.png"
+            src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/index/option03.png"
         />
 
         <view>删除</view>
       </view>
-    </view>
 
-    <view class="edit-file" v-if="showEditFileDialog">
-      <view class="title">重命名</view>
-      <view class="input-box">
-        <input type="text" v-model="selectFile.file_name" />
+      <view @click.stop="toShareFile(selectFile)" class="select-option1">
         <image
             mode="widthFix"
-            src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/index/close.png"
-            @click="selectFile.file_name && (selectFile.file_name = selectFile.file_formmat)"
-        />
-      </view>
-      <view class="options">
-        <image
-            mode="widthFix"
-            src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/index/btn1.png"
-            @click="showEditFileDialog = false"
-        />
-
-        <image
-            mode="widthFix"
-            src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/index/btn2.png"
-            @click="toEdit(selectFile)"
+            src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/index/btn02.png"
         />
       </view>
     </view>
   </view>
 
+  <wd-popup v-model="showEditFileDialog" @close="showEditFileDialog = false" custom-style="background: transparent">
+    <view class="edit-file" v-if="selectFile">
+      <image
+          class="close"
+          mode="widthFix"
+          src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/index/close2.png"
+          @click="showEditFileDialog = false"
+      />
+
+      <view class="title">编辑名称</view>
+      <view class="input-box">
+        <input type="text" v-model="selectFile.file_name" />
+        <image
+            mode="widthFix"
+            src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/index/close.png"
+            @click="selectFile.file_name && (selectFile.file_name = selectFile.file_formmat)"
+        />
+      </view>
+      <view class="options">
+        <view class="confirm" @click="toEdit(selectFile)">确定</view>
+      </view>
+    </view>
+  </wd-popup>
+
   <wd-popup v-model="showDeleteDialog" @close="showDeleteDialog = false" custom-style="background: transparent">
     <view class="delete-dialog">
-      <view class="tip">温馨提示</view>
-      <view class="title">文档将被彻底删除，请再次确认是否删除</view>
-      <view class="options">
-        <image
-            mode="widthFix"
-            src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/index/btn1.png"
-            @click="showDeleteDialog = false"
-        />
+      <image
+          class="close"
+          mode="widthFix"
+          src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/index/close2.png"
+          @click="showDeleteDialog = false"
+      />
 
-        <image
-            mode="widthFix"
-            src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/index/btn2.png"
-            @click="toDelete(selectFile)"
-        />
+      <view class="title">是否确定删除该文件，文件删除后无法找回。</view>
+      <view class="options">
+        <view class="cancel" @click="showDeleteDialog = false">取消</view>
+        <view class="confirm" @click="toDelete(selectFile)">确定</view>
       </view>
     </view>
   </wd-popup>
@@ -797,7 +792,7 @@ const goPreview = (item) => {
 
 <style lang="scss">
 page {
-  background: #F7F7F7 url("https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/index/bg.png") left top/100% auto no-repeat;
+  background: #FAFAFA url("https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/index/bg01.png") left top/100% auto no-repeat;
   padding-bottom: 200rpx;
 }
 </style>
@@ -848,48 +843,78 @@ page {
 }
 
 .index-header {
-  height: 403rpx;
+  height: 324rpx;
+  background: url("https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/index/bg02.png") left top -110rpx/100% auto no-repeat;
 }
 
 .box {
   padding: 0 30rpx;
 
-  .search-box {
-    padding: 0 15rpx 0 43rpx;
-    height: 100rpx;
-    background: #FFFFFF;
-    border-radius: 50rpx;
-    border: 5rpx solid #000000;
-    display: flex;
-    align-items: center;
-    margin-bottom: 26rpx;
+  .grid {
+    background: linear-gradient(3deg, #FFFFFF, #F9F7FF);
+    box-shadow: 1rpx 5rpx 18rpx 0rpx rgba(141,115,244,0.17), 0rpx 1rpx 16rpx 0rpx #FFFFFF;
+    border-radius: 40rpx;
+    padding: 28rpx;
+    margin-bottom: 50rpx;
 
-    input {
-      height: 100%;
-      flex-grow: 1;
+    .grid-title {
+      display: flex;
+      align-items: center;
+      gap: 6rpx;
+      margin-bottom: 39rpx;
+
+      text {
+        &:nth-child(1) {
+          width: 16rpx;
+          height: 16rpx;
+          background: #856BFF;
+          border-radius: 50%;
+        }
+
+        &:nth-child(2) {
+          font-weight: 600;
+          font-size: 22rpx;
+          color: #000000;
+        }
+      }
     }
 
-    .icon {
-      flex-shrink: 0;
-      width: 129rpx;
+    .scan-icon {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 36rpx;
+
+      .icon1 {
+        width: 134rpx;
+      }
+
+      .tip {
+        font-weight: 400;
+        font-size: 18rpx;
+        color: #000000;
+        line-height: 22rpx;
+        text-align: center;
+      }
+
+      .btn {
+        width: 537rpx;
+      }
     }
   }
 
-  .tools1 {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 34rpx;
-
-    image {
-      width: 332rpx;
+  .tools {
+    .tools-title {
+      font-weight: 500;
+      font-size: 28rpx;
+      color: #1F1F1F;
+      margin-bottom: 47rpx;
     }
   }
 }
 
 .index-content {
-  background: #FFFFFF;
-  border-radius: 30rpx;
 }
 .card-title {
   display: flex;
@@ -934,9 +959,30 @@ page {
 }
 
 .file-list-wrapper {
-  background: #FFFFFF;
-  border-radius: 30rpx;
-  padding: 23rpx 50rpx;
+  padding: 0 35rpx;
+
+  .card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 40rpx;
+
+    .tool-title {
+      display: flex;
+      align-items: center;
+
+      .title-word {
+        font-weight: 500;
+        font-size: 28rpx;
+        color: #1F1F1F;
+      }
+    }
+
+    .more {
+      font-size: 24rpx;
+      color: #BBBBBB;
+    }
+  }
 
   .card-title1 {
     padding-bottom: 26rpx;
@@ -1001,7 +1047,7 @@ page {
         justify-content: center;
 
         .empty-icon {
-          width: 245rpx;
+          width: 284rpx;
         }
       }
 
@@ -1012,9 +1058,9 @@ page {
         justify-content: center;
 
         .tip {
-          font-size: 22rpx;
-          color: #656565;
-          margin-bottom: 25rpx;
+          font-weight: 500;
+          font-size: 25rpx;
+          color: #9E9E9E;
         }
 
         .login {
@@ -1038,9 +1084,54 @@ page {
 
     .file-item {
       display: flex;
-      align-items: center;
+
+      .doc-more {
+        flex-shrink: 0;
+        position: relative;
+        top: 20rpx;
+
+        .more-dot {
+          width: 28rpx;
+          height: 28rpx;
+          border-radius: 50%;
+          border: none;
+          background: url("https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/index/icon06.png") left top/100% 100% no-repeat;
+        }
+
+        .more-dot1 {
+          width: 24rpx;
+          height: 24rpx;
+          background: #FFFFFF;
+          border-radius: 50%;
+          border: 2rpx solid #856BFF;
+        }
+      }
 
       .left {
+        align-self: stretch;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+
+        .filename {
+          font-size: 24rpx;
+          color: #1F1F1F;
+        }
+
+        .time {
+          font-size: 24rpx;
+          color: #9C9C9E;
+          display: flex;
+          align-items: center;
+
+          image {
+            width: 20rpx;
+            margin-right: 12rpx
+          }
+        }
+      }
+
+      .right {
         flex-shrink: 0;
         height: 140rpx;
         width: 140rpx;
@@ -1057,51 +1148,6 @@ page {
 
         .iconfont {
           font-size: 140rpx;
-        }
-      }
-
-      .right {
-        align-self: stretch;
-        flex-grow: 1;
-        display: flex;
-        flex-direction: column;
-
-        .filename {
-          color: #1F1F1F;
-          font-size: 28rpx;
-          font-weight: bold;
-        }
-
-        .time {
-          color: #9C9C9E;
-          font-size: 22rpx;
-          display: flex;
-          align-items: center;
-
-          image {
-            width: 20rpx;
-            margin-right: 12rpx
-          }
-        }
-      }
-
-      .doc-more {
-        flex-shrink: 0;
-
-        .more-dot {
-          width: 27rpx;
-          height: 27rpx;
-          background: #96F022;
-          border-radius: 50%;
-          border: 2rpx solid #000000;
-        }
-
-        .more-dot1 {
-          width: 27rpx;
-          height: 27rpx;
-          background: #FFFFFF;
-          border-radius: 50%;
-          border: 2rpx solid #D3D3D3;
         }
       }
     }
@@ -1176,12 +1222,12 @@ page {
   left: 0;
   right: 0;
   background: #ffffff;
-  box-shadow: 1rpx -13rpx 15rpx 1rpx rgba(144,144,144,0.08);
-  border-radius: 50rpx 50rpx 0rpx 0rpx;
+  box-shadow: 0rpx -6rpx 27rpx 0rpx rgba(192,212,220,0.04);
+  border: 1px solid #DEDEDE;
   z-index: 99999;
 
   .select-options-container {
-    padding: 65rpx 80rpx 50rpx;
+    padding: 32rpx 63rpx 50rpx;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -1194,85 +1240,118 @@ page {
       gap: 10rpx;
 
       image {
-        width: 80rpx;
+        width: 38rpx;
         height: auto;
       }
 
       view {
-        font-size: 26rpx;
+        font-size: 22rpx;
         color: #000000;
       }
     }
-  }
 
-  .edit-file {
-    padding: 30rpx 56rpx 50rpx;
-    display: flex;
-    flex-direction: column;
-
-    .title {
-      font-weight: 500;
-      font-size: 36rpx;
-      color: #000000;
-      margin-bottom: 34rpx;
-    }
-
-    .input-box {
-      height: 80rpx;
-      background: #F3F3F3;
-      border-radius: 10rpx;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0 25rpx;
-      margin-bottom: 58rpx;
-
-      input {
-        flex-grow: 1;
-      }
-
+    .select-option1 {
       image {
-        padding-left: 20rpx;
-        width: 28rpx;
+        width: 182rpx;
         height: auto;
-      }
-    }
-
-    .options {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-
-      image {
-        width: 300rpx;
-        height:  auto;
       }
     }
   }
 }
 
-.delete-dialog {
-  width: 621rpx;
+.edit-file {
+  width: 524rpx;
+  padding: 32rpx 0;
+  background: #FFFFFF;
+  border-radius: 30rpx;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: url("https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/index/bg2.png") left top/100% 100% no-repeat;
-  padding: 30rpx 43rpx;
-  box-sizing: border-box;
+  position: relative;
 
-  .tip {
-    font-weight: 600;
-    font-size: 39rpx;
-    color: #000000;
-    margin-bottom: 43rpx;
+  .close {
+    position: absolute;
+    top: 30rpx;
+    right: 30rpx;
+    width: 20rpx;
   }
 
   .title {
-    font-size: 35rpx;
+    font-weight: 500;
+    font-size: 28rpx;
     color: #000000;
-    line-height: 56rpx;
-    margin-bottom: 45rpx;
+    margin-bottom: 39rpx;
+  }
+
+  .input-box {
+    width: 420rpx;
+    height: 85rpx;
+    background: #F7F7F7;
+    border-radius: 10rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20rpx;
+    margin-bottom: 60rpx;
+
+    input {
+      flex-grow: 1;
+      font-size: 36rpx;
+      color: #464646;
+    }
+
+    image {
+      flex-shrink: 0;
+      padding-left: 20rpx;
+      width: 32rpx;
+      height: auto;
+    }
+  }
+
+  .options {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .confirm {
+      background: #856BFF;
+      width: 284rpx;
+      height: 73rpx;
+      color: #ffffff;
+      font-weight: 600;
+      font-size: 28rpx;
+      border-radius: 36rpx;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}
+
+.delete-dialog {
+  width: 524rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: url("https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/index/bg03.png") left top/100% 100% no-repeat;
+  padding: 164rpx 32rpx 32rpx;
+  box-sizing: border-box;
+  position: relative;
+
+  .close {
+    position: absolute;
+    top: 60rpx;
+    right: 30rpx;
+    width: 20rpx;
+  }
+
+  .title {
+    font-size: 34rpx;
+    color: #464646;
+    line-height: 49rpx;
+    margin-bottom: 46rpx;
   }
 
   .options {
@@ -1281,9 +1360,24 @@ page {
     align-items: center;
     justify-content: space-between;
 
-    image {
-      width: 247rpx;
-      height: auto;
+    view {
+      width: 223rpx;
+      height: 73rpx;
+      font-weight: 600;
+      font-size: 28rpx;
+      border-radius: 36rpx;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+    }
+
+    .cancel {
+      background: #F1C587;
+    }
+
+    .confirm {
+      background: #856BFF;
     }
   }
 }

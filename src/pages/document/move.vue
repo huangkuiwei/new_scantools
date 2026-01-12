@@ -1,10 +1,17 @@
 <template>
   <view class="move-box">
-    <view class="d-flex-center" style="height: 40px; background: #efefef;">
-      移动到
+    <image
+        class="close"
+        mode="widthFix"
+        src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/index/close2.png"
+        @click="$emit('update:moveShow', false)"
+    />
+
+    <view class="title">
+      移动文件
     </view>
 
-    <view class="global-m">
+    <view class="">
       <view class="move-ul">
         <image
             @click="tobackDict"
@@ -14,24 +21,22 @@
         />
 
         <view class="move-li d-flex" v-for="(item,index) in dictionary.files" :key="index">
-          <image
-              style="width: 67rpx; margin-left: 24rpx"
-              mode="widthFix"
-              src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/document/folder_icon.png"
-          />
+          <!-- <image -->
+          <!--     style="width: 67rpx; margin-left: 24rpx" -->
+          <!--     mode="widthFix" -->
+          <!--     src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/document/folder_icon.png" -->
+          <!-- /> -->
 
           <view @click="toDictionary(item)" style="flex-grow: 1">{{ item.folder_name }}</view>
 
           <view @click="toCheck(item)" class="d-flex">
-            <wd-checkbox :modelValue="item.check" checkedColor="#96F022"></wd-checkbox>
+            <wd-checkbox :modelValue="item.check" checkedColor="#856BFF"></wd-checkbox>
           </view>
         </view>
       </view>
     </view>
-    <view class="move-btn global-m">
-      <view class="flex-1">
-        <image @click="moveFile" mode="widthFix" src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/document/btn1.png" />
-      </view>
+    <view class="move-btn" @click="moveFile">
+      确定
     </view>
   </view>
   <wd-toast></wd-toast>
@@ -43,7 +48,7 @@ import { moveShow } from './document'
 import { useToast } from '/node_modules/wot-design-uni'
 import $http from '@/hooks/http'
 
-const emits = defineEmits(['update'])
+const emits = defineEmits(['update', 'update:moveShow'])
 
 const toast = useToast()
 const dActive = ref('')
@@ -55,6 +60,9 @@ const dictionary = ref({
 const props = defineProps({
   fileId: {
     type: [String, Array],
+  },
+  moveShow: {
+    type: Boolean,
   }
 })
 
@@ -132,27 +140,58 @@ defineExpose({
 
 <style scoped lang="scss">
 .move-box {
-  width: 90vw;
-  border-radius: 10px;
+  width: 524rpx;
+  border-radius: 30px;
   position: relative;
+  box-sizing: border-box;
+  padding: 36rpx 32rpx;
+
+  .close {
+    position: absolute;
+    top: 30rpx;
+    right: 30rpx;
+    width: 20rpx;
+  }
+
+  .title {
+    text-align: center;
+    font-weight: 500;
+    font-size: 28rpx;
+    color: #000000;
+    margin-bottom: 38rpx;
+  }
 }
 
 .move-btn {
+  background: #856BFF;
+  width: 284rpx;
+  height: 73rpx;
+  margin: 0 auto;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 28rpx;
+  border-radius: 36rpx;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .move-li {
   display: flex;
   align-items: center;
-  gap: 30rpx;
+  background: #F7F7F7;
+  border-radius: 10rpx;
+  padding: 15rpx 15rpx 15rpx 25rpx;
+  font-size: 36rpx;
+  color: #464646;
 }
 
 .move-ul {
   max-height: 40vh;
   overflow: auto;
+  margin-bottom: 36rpx;
   display: flex;
   flex-direction: column;
-  gap: 30rpx;
+  gap: 15rpx;
 }
 </style>

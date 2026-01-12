@@ -1,6 +1,5 @@
 <template>
   <view class="index-top">
-    <view class="index-header"></view>
   </view>
 
   <view class="global-m" style="position: relative;">
@@ -20,15 +19,41 @@
     </view>
 
     <template v-else>
-      <view class="header">
-        <text class="title">我的文档</text>
-        <image @click="showAddDicDialog = true" mode="widthFix" style="width: 70rpx" src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/document/folder.png"/>
-        <text style="flex-grow: 1"></text>
-        <text @click="selectFile1" class="select">{{ isSelectFile ? '取消' : '选择' }}</text>
+      <view class="options">
+        <view class="option-item" @click="chooseLocalPicture">
+          <image class="icon" mode="widthFix" src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/document/icon03.png"/>
+          <text>拍照导入</text>
+        </view>
+
+        <view class="option-item" @click="chooseLocalPicture">
+          <image class="icon" mode="widthFix" src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/document/icon04.png"/>
+          <text>相册导入</text>
+        </view>
+
+        <view class="option-item" @click="choosePDFFile">
+          <image class="icon" mode="widthFix" src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/document/icon05.png"/>
+          <text>文档导入</text>
+        </view>
       </view>
 
       <!--<view style="margin-top: 1rem; text-align: center">最近文件</view>-->
+      <view class="isSelectFile" v-if="isSelectFile">
+        <text @click="cancel">取消</text>
+        <text>已选择{{ files.filter(item => item.select).length }}项</text>
+        <text @click="selectAll">全选</text>
+      </view>
+
       <view class="folder-list">
+        <view class="header">
+          <text class="title">所有文档</text>
+          <text style="flex-grow: 1"></text>
+
+          <view class="options">
+            <image @click="showAddDicDialog = true" mode="widthFix" src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/document/icon01.png"/>
+            <image @click="selectFile1" mode="widthFix" src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/document/icon02.png"/>
+          </view>
+        </view>
+
         <image
             @click="tobackDict"
             v-show="fileUrl.length > 0"
@@ -65,14 +90,14 @@
 
             <image
                 v-if="!item.file_formmat"
-                style="width: 30px; margin-left: 10rpx"
+                style="width: 93rpx; margin-left: 10rpx"
                 mode="widthFix"
-                src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/document/folder_icon.png"
+                src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/document/folder.png"
             ></image>
           </view>
 
           <view class="right" :style="{ justifyContent: 'center', gap: '10rpx' }">
-            <view class="filename">
+            <view class="filename" :class="{ filename1: !item.file_formmat }">
               {{ item.folder_name }}
             </view>
 
@@ -80,7 +105,7 @@
                 class="time"
                 v-if="item.create_at"
             >
-              <text>{{ item.create_at }}</text>
+              <text>更新时间：{{ item.create_at }}</text>
             </view>
           </view>
 
@@ -89,37 +114,37 @@
               class="doc-more"
           >
             <template v-if="!isSelectFile">
-              <template v-if="item.file_formmat">
+              <template v-if="item.file_formmat || isSelectFile">
                 <view class="more-dot" v-if="tindex === item.id"></view>
                 <view class="more-dot1" v-else></view>
               </template>
 
-              <template v-else>
-                <view v-if="tindex === item.id" style="color: #CDF022; font-size: 24rpx; letter-spacing: 4rpx">
-                  ...
-                </view>
+              <!-- <template v-else> -->
+              <!--   <view v-if="tindex === item.id" style="color: #CDF022; font-size: 24rpx; letter-spacing: 4rpx"> -->
+              <!--     ... -->
+              <!--   </view> -->
 
-                <view v-else style="color: #030203; font-size: 24rpx; letter-spacing: 4rpx">
-                  ...
-                </view>
-              </template>
+              <!--   <view v-else style="color: #030203; font-size: 24rpx; letter-spacing: 4rpx"> -->
+              <!--     ... -->
+              <!--   </view> -->
+              <!-- </template> -->
             </template>
 
             <view class="detect-count" @click.stop="item.select = !item.select" v-else>
-              <template v-if="item.file_formmat">
+              <template v-if="item.file_formmat || isSelectFile">
                 <view class="more-dot" v-if="item.select"></view>
                 <view class="more-dot1" v-else></view>
               </template>
 
-              <template v-else>
-                <view v-if="item.select" style="color: #CDF022; font-size: 24rpx; letter-spacing: 4rpx">
-                  ...
-                </view>
+              <!-- <template v-else> -->
+              <!--   <view v-if="item.select" style="color: #CDF022; font-size: 24rpx; letter-spacing: 4rpx"> -->
+              <!--     ... -->
+              <!--   </view> -->
 
-                <view v-else style="color: #030203; font-size: 24rpx; letter-spacing: 4rpx">
-                  ...
-                </view>
-              </template>
+              <!--   <view v-else style="color: #030203; font-size: 24rpx; letter-spacing: 4rpx"> -->
+              <!--     ... -->
+              <!--   </view> -->
+              <!-- </template> -->
             </view>
           </view>
         </view>
@@ -162,11 +187,11 @@
   <!--</view>-->
 
   <view class="select-options" v-if="selectFile || isSelectFile">
-    <view class="select-options-container" v-if="!showEditFileDialog && !showAddDicDialog && !showDeleteDialog && !moveShow">
+    <view class="select-options-container">
       <view @click.stop="isSelectFile ? moveAll() : toMove(selectFile)" v-if="(selectFile && selectFile.file_formmat || isSelectFile)" class="select-option">
         <image
-            mode="widthFix"
-            src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/document/icon1.png"
+            mode="heightFix"
+            src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/index/option01.png"
         />
 
         <view>移动</view>
@@ -174,101 +199,92 @@
 
       <view @click.stop="isSelectFile ? editAll() : (showEditFileDialog = true)" class="select-option">
         <image
-            mode="widthFix"
-            src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/document/icon2.png"
+            mode="heightFix"
+            src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/index/option02.png"
         />
 
         <view>编辑</view>
       </view>
-      <view @click.stop="isSelectFile ? shareAll() : toShareFile(selectFile)" v-if="(selectFile && selectFile.file_formmat || isSelectFile)" class="select-option">
-        <image
-            mode="widthFix"
-            src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/document/icon3.png"
-        />
 
-        <view>分享</view>
-      </view>
       <view @click.stop="isSelectFile ? deleteAll() : (showDeleteDialog = true)" class="select-option">
         <image
-            mode="widthFix"
-            src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/document/icon4.png"
+            mode="heightFix"
+            src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/index/option03.png"
         />
 
         <view>删除</view>
       </view>
-    </view>
 
-    <view class="edit-file" v-if="showEditFileDialog">
-      <view class="title">重命名</view>
-      <view class="input-box">
-        <input type="text" v-model="selectFile.file_name" />
+      <view @click.stop="isSelectFile ? shareAll() : toShareFile(selectFile)" v-if="(selectFile && selectFile.file_formmat || isSelectFile)" class="select-option1">
         <image
             mode="widthFix"
-            src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/index/close.png"
-            @click="(selectFile.file_name = selectFile.file_formmat || '')"
-        />
-      </view>
-      <view class="options">
-        <image
-            mode="widthFix"
-            src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/index/btn1.png"
-            @click="showEditFileDialog = false"
-        />
-
-        <image
-            mode="widthFix"
-            src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/index/btn2.png"
-            @click="toEdit(selectFile)"
+            src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/index/btn02.png"
         />
       </view>
     </view>
   </view>
 
+  <wd-popup v-model="showEditFileDialog" @close="showEditFileDialog = false" custom-style="background: transparent">
+    <view class="edit-file" v-if="selectFile">
+      <image
+          class="close"
+          mode="widthFix"
+          src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/index/close2.png"
+          @click="showEditFileDialog = false"
+      />
+
+      <view class="title">编辑名称</view>
+      <view class="input-box">
+        <input type="text" v-model="selectFile.file_name" />
+        <image
+            mode="widthFix"
+            src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/index/close.png"
+            @click="(selectFile.file_name = selectFile.file_formmat || '')"
+        />
+      </view>
+      <view class="options">
+        <view class="confirm" @click="toEdit(selectFile)">确定</view>
+      </view>
+    </view>
+  </wd-popup>
+
   <wd-popup v-model="showDeleteDialog" @close="showDeleteDialog = false" custom-style="background: transparent">
     <view class="delete-dialog">
-      <view class="tip">温馨提示</view>
-      <view class="title">文档将被彻底删除，请再次确认是否删除</view>
-      <view class="options">
-        <image
-            mode="widthFix"
-            src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/index/btn1.png"
-            @click="showDeleteDialog = false"
-        />
+      <image
+          class="close"
+          mode="widthFix"
+          src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/index/close2.png"
+          @click="showDeleteDialog = false"
+      />
 
-        <image
-            mode="widthFix"
-            src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/index/btn2.png"
-            @click="toDelete(selectFile)"
-        />
+      <view class="title">是否确定删除该文件，文件删除后无法找回。</view>
+      <view class="options">
+        <view class="cancel" @click="showDeleteDialog = false">取消</view>
+        <view class="confirm" @click="toDelete(selectFile)">确定</view>
       </view>
     </view>
   </wd-popup>
 
   <wd-popup v-model="showAddDicDialog" @close="showAddDicDialog = false" custom-style="background: transparent">
-    <view class="delete-dialog" style="background: #ffffff; border-radius: 30rpx;">
-      <view class="tip">新建文件夹</view>
+    <view class="edit-file">
+      <image
+          class="close"
+          mode="widthFix"
+          src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/index/close2.png"
+          @click="showAddDicDialog = false"
+      />
 
+      <view class="title">新建文件夹</view>
       <view class="input-box">
-        <input type="text" placeholder="请输入文件夹名称" v-model="fileName" />
+        <input type="text" v-model="fileName" placeholder="请输入文件夹名称" />
         <image
             mode="widthFix"
-            src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/index/close.png"
+            src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/index/close.png"
             @click="fileName = ''"
         />
       </view>
-
       <view class="options">
-        <image
-            mode="widthFix"
-            src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/index/btn1.png"
-            @click="showAddDicDialog = false"
-        />
-
-        <image
-            mode="widthFix"
-            src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/index/btn2.png"
-            @click="addDic()"
-        />
+        <view class="confirm" @click="addDic()">确定</view>
       </view>
     </view>
   </wd-popup>
@@ -287,6 +303,7 @@
         ref="moveRef"
         @update="onUpdate"
         :fileId="fileId"
+        v-model:moveShow="moveShow"
     ></Move>
   </wd-popup>
   <wd-message-box selector="wd-edit-box-slot"></wd-message-box>
@@ -789,6 +806,31 @@ const addDic = () => {
   })
 }
 
+// TODO
+const chooseLocalPicture = () => {
+
+}
+
+// TODO
+const choosePDFFile = () => {
+
+}
+
+const cancel = () => {
+  files.value.forEach(item => {
+    item.select = false
+  })
+
+  isSelectFile.value = false
+  tindex.value = -1
+}
+
+const selectAll = () => {
+  files.value.forEach(item => {
+    item.select = true
+  })
+}
+
 const tobackDict = () => {
   fileUrl.value.pop()
 
@@ -1144,7 +1186,7 @@ page {
 </style>
 <style scoped lang="scss">
 .index-top {
-  background: #F7F7F7 linear-gradient(228deg, #D5F1FD 0%, #D5F5C2 33%, #D6F985 100%) left top/100% 513rpx no-repeat;
+  background: linear-gradient(-1deg, #FAFAFA, #F7F6FF);
 }
 
 .index-header {
@@ -1152,9 +1194,9 @@ page {
 }
 
 .folder-list {
-  .lastFile {
-    border-bottom: 2rpx solid #E7E7E7;
-  }
+  // .lastFile {
+  //   border-bottom: 2rpx solid #E7E7E7;
+  // }
 }
 
 .file-item {
@@ -1167,7 +1209,7 @@ page {
 
   .left {
     flex-shrink: 0;
-    margin-right: 18rpx;
+    margin-right: 26rpx;
     display: flex;
     align-items: center;
     // justify-content: center;
@@ -1191,14 +1233,19 @@ page {
     flex-direction: column;
 
     .filename {
+      font-size: 24rpx;
       color: #1F1F1F;
-      font-size: 28rpx;
-      font-weight: bold;
+
+      &.filename1 {
+        font-size: 28rpx;
+        color: #000000;
+        font-weight: 500;
+      }
     }
 
     .time {
+      font-size: 24rpx;
       color: #9C9C9E;
-      font-size: 22rpx;
       display: flex;
       align-items: center;
 
@@ -1213,19 +1260,19 @@ page {
     flex-shrink: 0;
 
     .more-dot {
-      width: 27rpx;
-      height: 27rpx;
-      background: #96F022;
+      width: 24rpx;
+      height: 24rpx;
+      background: #856BFF;
       border-radius: 50%;
-      border: 2rpx solid #000000;
+      border: 2rpx solid #856BFF;
     }
 
     .more-dot1 {
-      width: 27rpx;
-      height: 27rpx;
+      width: 24rpx;
+      height: 24rpx;
       background: #FFFFFF;
       border-radius: 50%;
-      border: 2rpx solid #D3D3D3;
+      border: 2rpx solid #856BFF;
     }
   }
 }
@@ -1296,35 +1343,52 @@ page {
 }
 
 .global-m {
-  padding: 20rpx 30rpx 80rpx;
+  padding: 28rpx 28rpx 45rpx;
+  border-radius: 40rpx;
 
-  .header {
+  .options {
     display: flex;
     align-items: center;
-    padding-bottom: 15rpx;
+    justify-content: space-between;
+    margin-bottom: 34rpx;
 
-    .title {
-      font-weight: 500;
-      font-size: 36rpx;
-      color: #000000;
-      margin-right: 33rpx;
-    }
-
-    image {
-     width: 55rpx;
-      flex-shrink: 0;
-    }
-
-    .select {
-      width: 109rpx;
-      height: 46rpx;
-      background: #EEEEEE;
-      border-radius: 23rpx;
-      font-size: 30rpx;
-      color: #000000;
+    .option-item {
+      width: 211rpx;
+      height: 112rpx;
+      background: #FFFFFF;
+      border-radius: 20rpx;
       display: flex;
       align-items: center;
       justify-content: center;
+      gap: 20rpx;
+
+      .icon {
+        width: 34rpx;
+      }
+
+      text {
+        font-size: 31rpx;
+        color: #000000;
+      }
+    }
+  }
+
+  .isSelectFile {
+    border-radius: 40rpx 40rpx 0 0;
+    background: #856BFF;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 34rpx;
+    color: #ffffff;
+
+    text {
+      font-weight: 500;
+      font-size: 26rpx;
+
+      &:nth-child(2) {
+        font-size: 30rpx;
+      }
     }
   }
 
@@ -1332,6 +1396,30 @@ page {
     background: #ffffff;
     border-radius: 10rpx;
     padding: 30rpx 20rpx;
+
+    .header {
+      display: flex;
+      align-items: center;
+      padding-bottom: 25rpx;
+      margin-bottom: 20rpx;
+      border-bottom: 2rpx solid #00000020;
+
+      .title {
+        font-weight: 500;
+        font-size: 35rpx;
+        color: #1F1F1F;
+      }
+
+      .options {
+        display: flex;
+        align-items: center;
+        gap: 44rpx;
+
+        image {
+          width: 30rpx;
+        }
+      }
+    }
   }
 }
 
@@ -1341,15 +1429,15 @@ page {
   left: 0;
   right: 0;
   background: #ffffff;
-  box-shadow: 1rpx -13rpx 15rpx 1rpx rgba(144,144,144,0.08);
-  border-radius: 50rpx 50rpx 0rpx 0rpx;
+  box-shadow: 0rpx -6rpx 27rpx 0rpx rgba(192,212,220,0.04);
+  border: 1px solid #DEDEDE;
   z-index: 99999;
 
   .select-options-container {
-    padding: 65rpx 20rpx 50rpx;
+    padding: 32rpx 63rpx 50rpx;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
 
     .select-option {
       display: flex;
@@ -1359,108 +1447,118 @@ page {
       gap: 10rpx;
 
       image {
-        width: 80rpx;
-        height: auto;
+        height: 38rpx;
+        width: auto;
       }
 
       view {
-        font-size: 26rpx;
+        font-size: 22rpx;
         color: #000000;
       }
     }
-  }
 
-  .edit-file {
-    padding: 30rpx 56rpx 50rpx;
-    display: flex;
-    flex-direction: column;
-
-    .title {
-      font-weight: 500;
-      font-size: 36rpx;
-      color: #000000;
-      margin-bottom: 34rpx;
-    }
-
-    .input-box {
-      height: 80rpx;
-      background: #F3F3F3;
-      border-radius: 10rpx;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0 25rpx;
-      margin-bottom: 58rpx;
-
-      input {
-        flex-grow: 1;
-      }
-
+    .select-option1 {
       image {
-        padding-left: 20rpx;
-        width: 28rpx;
+        width: 182rpx;
         height: auto;
-      }
-    }
-
-    .options {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-
-      image {
-        width: 300rpx;
-        height:  auto;
       }
     }
   }
 }
 
-.delete-dialog {
-  width: 621rpx;
+.edit-file {
+  width: 524rpx;
+  padding: 32rpx 0;
+  background: #FFFFFF;
+  border-radius: 30rpx;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: url("https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/index/bg2.png") left top/100% 100% no-repeat;
-  padding: 30rpx 43rpx;
-  box-sizing: border-box;
+  position: relative;
 
-  .tip {
-    font-weight: 600;
-    font-size: 39rpx;
-    color: #000000;
-    margin-bottom: 43rpx;
+  .close {
+    position: absolute;
+    top: 30rpx;
+    right: 30rpx;
+    width: 20rpx;
   }
 
   .title {
-    font-size: 35rpx;
+    font-weight: 500;
+    font-size: 28rpx;
     color: #000000;
-    line-height: 56rpx;
-    margin-bottom: 45rpx;
+    margin-bottom: 39rpx;
   }
 
   .input-box {
-    height: 80rpx;
-    background: #F3F3F3;
+    width: 420rpx;
+    height: 85rpx;
+    background: #F7F7F7;
     border-radius: 10rpx;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0 25rpx;
-    margin-bottom: 58rpx;
-    box-sizing: border-box;
-    width: 100%;
+    padding: 0 20rpx;
+    margin-bottom: 60rpx;
 
     input {
       flex-grow: 1;
+      font-size: 36rpx;
+      color: #464646;
     }
 
     image {
+      flex-shrink: 0;
       padding-left: 20rpx;
-      width: 28rpx;
+      width: 32rpx;
       height: auto;
     }
+  }
+
+  .options {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .confirm {
+      background: #856BFF;
+      width: 284rpx;
+      height: 73rpx;
+      color: #ffffff;
+      font-weight: 600;
+      font-size: 28rpx;
+      border-radius: 36rpx;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}
+
+.delete-dialog {
+  width: 524rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: url("https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/index/bg03.png") left top/100% 100% no-repeat;
+  padding: 164rpx 32rpx 32rpx;
+  box-sizing: border-box;
+  position: relative;
+
+  .close {
+    position: absolute;
+    top: 60rpx;
+    right: 30rpx;
+    width: 20rpx;
+  }
+
+  .title {
+    font-size: 34rpx;
+    color: #464646;
+    line-height: 49rpx;
+    margin-bottom: 46rpx;
   }
 
   .options {
@@ -1469,9 +1567,24 @@ page {
     align-items: center;
     justify-content: space-between;
 
-    image {
-      width: 247rpx;
-      height: auto;
+    view {
+      width: 223rpx;
+      height: 73rpx;
+      font-weight: 600;
+      font-size: 28rpx;
+      border-radius: 36rpx;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+    }
+
+    .cancel {
+      background: #F1C587;
+    }
+
+    .confirm {
+      background: #856BFF;
     }
   }
 }
