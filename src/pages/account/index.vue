@@ -1,8 +1,8 @@
 <template>
-  <view style="margin-top: 0.4rem;" class="account">
+  <view style="margin-top: 10rpx;" class="account">
     <wd-card
       type="rectangle"
-      custom-class="h-card"
+      custom-class="h-card1"
     >
       <wd-cell-group border>
         <wd-cell title="头像" center>
@@ -137,13 +137,30 @@ const chooseAvatar = async (event) => {
   }
 }
 </script>
-<style>
+<style lang="scss">
 page{
   background: rgba(247, 248, 252, 1);
 }
 
 .wd-cell__title {
+  font-size: 28rpx;
   color: #333333;
+}
+
+.h-card1 {
+  padding: 0 34rpx !important;
+
+  .wd-card__title-content {
+    display: none;
+  }
+
+  .wd-card__content {
+    padding: 20rpx 0 0 0 !important;
+  }
+
+  .wd-card__footer {
+    display: none !important;
+  }
 }
 </style>
 <style scoped lang="scss">

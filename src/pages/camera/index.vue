@@ -45,7 +45,7 @@
           <view @click="takePicture" class="camera-btn">
             <!--<view class="camera-box"></view>-->
             <image
-                src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/camera/camera-icon.png"
+                src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/camera/camera-icon.png"
                 style="width: 104rpx; height: 104rpx"
                 mode=""
             />
@@ -64,7 +64,7 @@
 
           <!-- 导入图片 -->
           <view @click="chooseLocalPicture" v-else>
-            <wd-badge bg-color="#CDF022" :modelValue="picList.length">
+            <wd-badge bg-color="#856BFF" :modelValue="picList.length">
               <view class="camera-pic_more">
                 <image src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/scantool/static/assets/home/new/icon3/import-pic.png"/>
                 <text>导入图片</text>
@@ -156,25 +156,24 @@
   <wd-popup
       :closable="false"
       :modelValue="countTipDialog"
-      custom-style="width: 750rpx; background: transparent; top: calc(50vh - 600rpx); margin: 0 auto;"
+      custom-style="width: 700rpx; background: transparent; top: calc(50vh - 600rpx); margin: 0 auto;"
       position="top"
       :z-index="99999"
   >
     <view class="count-tip-container">
       <view class="close">
-        <image @click="countTipDialog = false" mode="widthFix" src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/icon/close.png" />
+        <image @click="countTipDialog = false" mode="widthFix" src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/icon/close.png" />
       </view>
-      <image v-if="count >= 3" src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/icon/vip-dialog-bg.png" mode="widthFix" />
-      <image v-else src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/icon/vip-dialog-bg2.png" mode="widthFix" />
+      <image src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/icon/vip-dialog-bg2.png" mode="widthFix" />
       <view class="btn" @click="toRouter('/pages/member/index')">
-        <image mode="widthFix" src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/icon/buy-btn.png" />
+        <image mode="widthFix" src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/icon/buy-btn.png" />
       </view>
 
       <view class="count-info">
         <view class="count-number">
-          <image mode="heightFix" style="height: 76rpx" src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/icon/0chance.png" v-if="count === 0"/>
-          <image mode="heightFix" style="height: 76rpx" src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/icon/1chance.png" v-if="count === 1"/>
-          <image mode="heightFix" style="height: 76rpx" src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/icon/2chance.png" v-if="count === 2"/>
+          <text>您的免费体验次数</text>
+          <text>{{ count > 0 ? `仅剩${count}次` : '已用完' }}</text>
+          <text>加入会员享受全部权益</text>
         </view>
 
       </view>
@@ -1137,8 +1136,8 @@ page {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #212121;
-    background: #CDF022;
+    color: #ffffff;
+    background: #856BFF;
   }
 
   .pic {

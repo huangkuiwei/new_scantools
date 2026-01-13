@@ -2,29 +2,6 @@
   <view class="message-my">
     <wd-message-box selector="wd-message-box-slot">
       <view class="message-content">
-        <!--<view class="message-img">-->
-        <!--  <image style="width: 180px;" mode="widthFix" src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/scantool/static/assets/my/huojian.png"></image>-->
-        <!--</view>-->
-        <!--<view class="mc-title">-->
-        <!--  发现新版本-->
-        <!--</view>-->
-        <!--<view style="margin: 0.4rem 0 1rem 0;">V1.001.02</view>-->
-        <!--<view class="message-li d-flex">-->
-        <!--  <view class="m-dot"></view>-->
-        <!--  <view>部分界面优化升级</view>-->
-        <!--</view>-->
-        <!--<view class="message-li d-flex">-->
-        <!--  <view class="m-dot"></view>-->
-        <!--  <view>优化功能升级</view>-->
-        <!--</view>-->
-        <!--<view style="margin-top: 1rem;">-->
-        <!--  <wd-button block @click="toMsg">-->
-        <!--    立 即 体 验-->
-        <!--  </wd-button>-->
-        <!--</view>-->
-        <!--<view style="margin-top: 0.6rem;" @click="toMsg">-->
-        <!--  忽略本次更新-->
-        <!--</view>-->
         <view class="title">版本升级</view>
         <view style="margin-top: 330rpx; font-size: 32rpx">已是最新版本</view>
       </view>
@@ -78,9 +55,9 @@ defineExpose({
     position: absolute;
     top: 100rpx;
     left: 60rpx;
-    color: #08C39F;
+    font-weight: 600;
     font-size: 54rpx;
-    font-weight: bold;
+    color: #FFFFFF;
   }
 }
 </style>

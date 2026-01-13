@@ -8,7 +8,7 @@
         <image
             class="empty-icon"
             mode="widthFix"
-            src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/index/empty.png"
+            src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/index/empty.png"
         />
 
         <view class="login-box" v-if="!user.uid">
@@ -20,12 +20,12 @@
 
     <template v-else>
       <view class="options">
-        <view class="option-item" @click="chooseLocalPicture">
+        <view class="option-item" @click="chooseLocalPicture(['camera'])">
           <image class="icon" mode="widthFix" src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/document/icon03.png"/>
           <text>拍照导入</text>
         </view>
 
-        <view class="option-item" @click="chooseLocalPicture">
+        <view class="option-item" @click="chooseLocalPicture(['album'])">
           <image class="icon" mode="widthFix" src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/document/icon04.png"/>
           <text>相册导入</text>
         </view>
@@ -118,16 +118,6 @@
                 <view class="more-dot" v-if="tindex === item.id"></view>
                 <view class="more-dot1" v-else></view>
               </template>
-
-              <!-- <template v-else> -->
-              <!--   <view v-if="tindex === item.id" style="color: #CDF022; font-size: 24rpx; letter-spacing: 4rpx"> -->
-              <!--     ... -->
-              <!--   </view> -->
-
-              <!--   <view v-else style="color: #030203; font-size: 24rpx; letter-spacing: 4rpx"> -->
-              <!--     ... -->
-              <!--   </view> -->
-              <!-- </template> -->
             </template>
 
             <view class="detect-count" @click.stop="item.select = !item.select" v-else>
@@ -135,16 +125,6 @@
                 <view class="more-dot" v-if="item.select"></view>
                 <view class="more-dot1" v-else></view>
               </template>
-
-              <!-- <template v-else> -->
-              <!--   <view v-if="item.select" style="color: #CDF022; font-size: 24rpx; letter-spacing: 4rpx"> -->
-              <!--     ... -->
-              <!--   </view> -->
-
-              <!--   <view v-else style="color: #030203; font-size: 24rpx; letter-spacing: 4rpx"> -->
-              <!--     ... -->
-              <!--   </view> -->
-              <!-- </template> -->
             </view>
           </view>
         </view>
@@ -308,6 +288,15 @@
   </wd-popup>
   <wd-message-box selector="wd-edit-box-slot"></wd-message-box>
   <Share :show="shareShow"></Share>
+
+  <wd-popup
+      :z-index="999999"
+      custom-style="max-height: calc(100vh - 44px); background: #262626;"
+      v-model="ustate"
+      position="bottom"
+  >
+    <Util @changeTab="onTabs" :toolType="toolType"></Util>
+  </wd-popup>
 </template>
 
 <script setup>
@@ -330,6 +319,8 @@ import {
 import { useMessage } from '/node_modules/wot-design-uni'
 import $http from '@/hooks/http'
 import Move from './move.vue'
+import { ustate } from '@/pages/camera/camera'
+import Util from '@/pages/camera/util2.vue'
 
 const addMessage = useMessage('wd-add-box-slot')
 const deleteMessage = useMessage('wd-delete-box-slot')
@@ -359,6 +350,9 @@ const selectFile = ref()
 const showEditFileDialog = ref(false)
 const showDeleteDialog = ref(false)
 const showAddDicDialog = ref(false)
+
+const toolType = ref(1)
+const picList = ref([])
 
 watchEffect(() => {
   files.value.forEach(item => {
@@ -806,14 +800,187 @@ const addDic = () => {
   })
 }
 
-// TODO
-const chooseLocalPicture = () => {
+const chooseLocalPicture = (items) => {
+  uni.chooseImage({
+    count: 9,
+    sizeType: ['original', 'compressed'],
+    sourceType: items,
+    success: (res) => {
+      if (typeof res.tempFilePaths === 'string') {
+        picList.value = [res.tempFilePaths]
+      } else {
+        picList.value = res.tempFilePaths
+      }
 
+      toolType.value = 2
+      ustate.value = true
+    },
+    fail: (err) => {
+      console.error("选择本地图片失败：", err);
+    },
+  });
 }
 
-// TODO
 const choosePDFFile = () => {
+  uni.chooseMessageFile({
+    count: 1,
+    type: 'file',
+    extension: ['pdf'],
+    success: async (response) => {
+      picList.value = response.tempFiles
 
+      toolType.value = 1
+      ustate.value = true
+    },
+    fail: (err) => {
+      console.log(err);
+    }
+  });
+}
+
+const onTabs = (item) => {
+  if (toolType.value === 1) {
+    toRouter('/pages/pdf-transform/index', item.url + '&url=' + picList.value[0].path)
+  } else {
+    getCount(item.index)
+  }
+}
+
+const getCount = async (tab) => {
+  let action_name = ''
+  let url = ''
+
+  if (tab === 4) {
+    action_name = 'ScanCertificate'
+    url = 'api/user/tools/scan/tools_left'
+  } else if (tab === 5) {
+    action_name = 'TextExtraction'
+    url = 'api/user/tools/scan/tools_left'
+  } else if (tab === 6) {
+    action_name = 'ScanFile'
+    url = 'api/user/tools/scan/tools_left'
+  } else if (tab === 7) {
+    action_name = 'PhotoCounting'
+    url = 'api/user/tools/scan/tools_left'
+  } else if (tab === 8) {
+    action_name = 'HandwriteExtraction'
+    url = 'api/user/tools/scan/tools_left'
+  } else if (tab === 9) {
+    action_name = 'PhotoTranslate'
+    url = 'api/user/tools/scan/tools_left'
+  } else if (tab === 10) {
+    action_name = 'PhotoRemoveHandwrite'
+    url = 'api/user/tools/scan/tools_left'
+  } else if (tab === 11) {
+    action_name = 'IdentifyingFormulas'
+    url = 'api/user/tools/scan/tools_left'
+  } else if (tab === 12) {
+    action_name = 'AddWatermark'
+    url = 'api/user/tools/pic/tools_left'
+  } else if (tab === 13) {
+    action_name = 'CompositeLongImage'
+    url = 'api/user/tools/pic/tools_left'
+  } else if (tab === 14) {
+    action_name = 'ImgToWord'
+    url = 'api/user/tools/pic/tools_left'
+  } else if (tab === 15) {
+    action_name = 'ImgToExcel'
+    url = 'api/user/tools/pic/tools_left'
+  } else if (tab === 16) {
+    action_name = 'ImgToPdf'
+    url = 'api/user/tools/pic/tools_left'
+  } else if (tab === 17) {
+    action_name = 'ImgToPPT'
+    url = 'api/user/tools/pic/tools_left'
+  } else if (tab === 18) {
+    action_name = 'RemoveWatermark'
+    url = 'api/user/tools/pic/tools_left'
+  }
+
+  let res = await $http.get(`${url}/${action_name}`, {}, {
+    showLoginModal: true
+  }).catch(() => {})
+
+  if (res?.data) {
+    // 剩余次数
+    if (res.data.left <= 0) {
+      uni.showToast({
+        title: '该功能可用次数为0，请重新选择',
+        icon: 'none',
+      })
+    }
+    else {
+      if (picList.value.length == 0) {
+        uni.showToast({
+          title: '请先选择图片',
+          icon: 'none'
+        })
+        return
+      }
+
+      ustate.value = false
+
+      // 扫描服务-证件扫描
+      if (tab === 4) {
+        toRouter("/pages/cropping/index", "urls=" + picList.value.slice(0, 2).join(',') + '&tab=4&cerIndex=1');
+        return
+      }
+
+      // 扫描服务-文字提取/手写文字识别
+      if (tab === 5 || tab === 8) {
+        toRouter('/pages/text-extraction/index', 'url=' + picList.value[0] + `&tab=${tab}`)
+        return
+      }
+
+      // 扫描服务-文件扫描，最多上传9张
+      if (tab === 6) {
+        toRouter("/pages/cropping/index", "urls=" + picList.value.join(',') + '&tab=6');
+        return
+      }
+
+      // 扫描服务-拍照计数 TODO 计数接口未返回数据
+      if (tab === 7) {
+        toRouter('/pages/detect-view/index', 'url=' + picList.value[0])
+        return
+      }
+
+      // 扫描服务-拍照翻译
+      if (tab === 9) {
+        toRouter('/pages/translate/index', 'url=' + picList.value[0])
+        return
+      }
+
+      // 扫描服务-试卷去手写
+      if (tab === 10) {
+        toRouter("/pages/cropping/index", "urls=" + picList.value.join(',') + '&tab=10');
+        return
+      }
+
+      // 扫描服务-识别公式
+      if (tab === 11) {
+        toRouter('/pages/mathjax/index', 'url=' + picList.value[0] + '&type=gongshi')
+        return
+      }
+
+      // 图片工具-图片加水印
+      if (tab === 12) {
+        toRouter('/pages/watermark/index', 'url=' + picList.value[0] + '&type=watermark')
+        return
+      }
+
+      // 图片工具-拼图，最多上传9张
+      if (tab === 13) {
+        toRouter("/pages/cropping/index", "urls=" + picList.value.join(',') + '&tab=13');
+        return
+      }
+
+      // 图片工具-图片转word/excel/ppt/pdf，最多上传9张
+      if (tab === 14 || tab === 15 || tab === 16 || tab === 17) {
+        toRouter("/pages/cropping/index", "urls=" + picList.value.join(',') + `&tab=${tab}`);
+        return;
+      }
+    }
+  }
 }
 
 const cancel = () => {
@@ -1624,11 +1791,11 @@ page {
     .login {
       width: 157rpx;
       height: 55rpx;
-      background: #333333;
+      background: #856BFF;
       border-radius: 15rpx;
       font-weight: 500;
       font-size: 21rpx;
-      color: #CDF022;
+      color: #ffffff;
       display: flex;
       align-items: center;
       justify-content: center;

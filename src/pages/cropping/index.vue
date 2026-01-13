@@ -564,20 +564,20 @@ page {
 
 .submit {
   background: #ffffff;
-  border: 2rpx solid #CDF022;
+  border: 2rpx solid #856BFF;
   border-radius: 999px;
   font-size: 28rpx;
-  color: #CDF022;
+  color: #856BFF;
   width: 180rpx;
   margin: 0;
   padding: 0;
 }
 
 .share {
-  background: #CDF022;
+  background: #856BFF;
   border-radius: 999px;
   font-size: 28rpx;
-  color: #212121;
+  color: #ffffff;
   width: 180rpx;
   margin: 0;
   padding: 0;

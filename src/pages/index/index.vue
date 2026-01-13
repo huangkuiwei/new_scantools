@@ -148,7 +148,12 @@
             />
 
             <view class="add-box">
-              <view class="tip">暂无文档</view>
+              <view class="tip" v-if="user.uid">暂无文档</view>
+
+              <template v-else>
+                <view style="font-size: 22rpx;color: #656565; margin-bottom: 25rpx;">登录扫描账号，查看账号内同步文档</view>
+                <view class="login" @click="toRouter('/pages/login/index')">登录</view>
+              </template>
             </view>
           </view>
         </view>
@@ -1066,11 +1071,11 @@ page {
         .login {
           width: 157rpx;
           height: 55rpx;
-          background: #333333;
+          background: #856BFF;
           border-radius: 15rpx;
           font-weight: 500;
           font-size: 21rpx;
-          color: #CDF022;
+          color: #ffffff;
           display: flex;
           align-items: center;
           justify-content: center;

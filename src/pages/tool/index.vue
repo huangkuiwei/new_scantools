@@ -1,23 +1,27 @@
 <template>
-  <view class="index-top">
-    <view class="index-header"></view>
-  </view>
+  <view style="padding: 30rpx 34rpx">
+    <!-- <view @click="buyVip"> -->
+    <!--   <image style="width: 100%" mode="widthFix" src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/tool/banner.png"></image> -->
+    <!-- </view> -->
 
-  <view style="padding: 30rpx">
-    <view @click="buyVip">
-      <image style="width: 100%" mode="widthFix" src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/tool/banner.png"></image>
-    </view>
-
-    <view class="d-flex" style="font-weight: 500;font-size: 32rpx;color: #1F1F1F; padding: 20rpx 0 6rpx">
-      <view>扫描服务</view>
-    </view>
     <scroll-view scroll-y="true">
-      <view class="tool-grid">
+      <view
+          class="d-flex"
+          style="
+            font-weight: 500;
+            font-size: 28rpx;
+            color: #1F1F1F;
+          "
+      >
+        <view>扫描服务</view>
+      </view>
+
+      <view class="tool-grid tool-grid1">
         <view @click="goPage(item)" class="tool-card" v-for="(item,index) in navs" :key="index">
           <wd-card custom-class="h-card mb-0">
             <view class="d-flex" style="">
-              <image style="height: 66rpx; width: 66rpx;" :src="item.src"></image>
-              <view style="font-weight: 500;font-size: 28rpx;color: #1F1F1F; flex-grow: 1; text-align: right; padding-right: 20rpx">
+              <image style="height: 38rpx; width: 38rpx;" :src="item.src"></image>
+              <view style="font-weight: 500;font-size: 24rpx;color: #1F1F1F; flex-grow: 1; text-align: left; ">
                 {{ item.name }}
               </view>
               <image v-if="item.hot" class="hot" src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/scantool/static/assets/hot.png" mode="widthFix"></image>
@@ -25,15 +29,22 @@
           </wd-card>
         </view>
       </view>
-      <view class="d-flex" style="font-weight: 500;font-size: 32rpx;color: #1F1F1F; padding: 20rpx 0 6rpx">
+      <view
+          class="d-flex"
+          style="
+            font-weight: 500;
+            font-size: 28rpx;
+            color: #1F1F1F;
+          "
+      >
         <view>图片工具</view>
       </view>
-      <view class="tool-grid">
+      <view class="tool-grid tool-grid2">
         <view @click="goPage(item)" class="tool-card" v-for="(item,index) in pictures" :key="index">
           <wd-card custom-class="h-card mb-0">
             <view class="d-flex">
-              <image style="height: 66rpx; width: 66rpx;" :src="item.src"></image>
-              <view style="font-weight: 500;font-size: 28rpx;color: #1F1F1F; flex-grow: 1; text-align: right; padding-right: 20rpx">
+              <image style="height: 38rpx; width: 38rpx;" :src="item.src"></image>
+              <view style="font-weight: 500;font-size: 24rpx;color: #1F1F1F; flex-grow: 1; text-align: right; ">
                 {{ item.name }}
               </view>
               <image v-if="item.hot" class="hot" src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/scantool/static/assets/hot.png" mode="widthFix"></image>
@@ -42,15 +53,22 @@
         </view>
 
       </view>
-      <view class="d-flex" style="font-weight: 500;font-size: 32rpx;color: #1F1F1F; padding: 20rpx 0 6rpx">
-        <view>PDF工具</view>
+      <view
+          class="d-flex"
+          style="
+            font-weight: 500;
+            font-size: 28rpx;
+            color: #1F1F1F;
+          "
+      >
+        <view>PDF转换</view>
       </view>
-      <view class="tool-grid">
+      <view class="tool-grid tool-grid3">
         <view @click="goPdf(item)" class="tool-card" v-for="(item,index) in pdfs" :key="index">
           <wd-card custom-class="h-card mb-0">
             <view class="d-flex">
-              <image style="height: 82rpx; width: 82rpx;" :src="item.src"></image>
-              <view style="font-weight: 500;font-size: 28rpx;color: #1F1F1F; flex-grow: 1; text-align: right; padding-right: 20rpx">
+              <image style="height: 38rpx; width: 38rpx;" :src="item.src"></image>
+              <view style="font-weight: 500;font-size: 24rpx;color: #1F1F1F; flex-grow: 1; text-align: right; ">
                 {{ item.name }}
               </view>
               <image v-if="item.hot" class="hot" src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/scantool/static/assets/hot.png" mode="widthFix"></image>
@@ -72,80 +90,80 @@ import { toRouter } from '@/hooks/utils'
 const navs = ref([
   {
     name: '证件扫描',
-    src: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/tool/u1.png',
+    src: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/tool/u1.png',
     index: 4,
   },
   {
-    name: '文字提取',
-    src: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/tool/u2.png',
-    index: 5
-  },
-  {
     name: '文件扫描',
-    src: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/tool/u2.png',
+    src: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/tool/u2.png',
     index: 6
   },
   {
-    name: '拍照计数',
-    src: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/tool/u4.png',
-    index: 7,
+    name: '文字提取',
+    src: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/tool/u3.png',
+    index: 5
   },
   {
-    name: '手写文字识别',
-    src: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/tool/u5.png',
-    index: 8
+    name: '识别公式',
+    src: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/tool/u4.png',
+    index: 11
   },
   {
     name: '拍照翻译',
-    src: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/tool/u6.png',
+    src: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/tool/u5.png',
     index: 9
   },
   {
     name: '试卷去手写',
-    src: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/tool/u7.png',
+    src: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/tool/u6.png',
     index: 10
   },
   {
-    name: '识别公式',
-    src: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/tool/u8.png',
-    index: 11
+    name: '手写文字识别',
+    src: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/tool/u7.png',
+    index: 8
+  },
+  {
+    name: '拍照计数',
+    src: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/tool/u8.png',
+    index: 7,
   },
 ])
 
 const pictures = ref([
   {
     name: '图片加水印',
-    src: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/tool/p1.png',
+    src: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/tool/p1.png',
     index: 12
   },
   {
     name: '图片去水印',
-    src: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/tool/p2.png',
+    src: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/tool/p2.png',
     index: 18,
   },
   {
     name: '图片转Word',
-    src: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/tool/p3.png',
+    src: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/tool/p3.png',
     index: 14
   },
   {
     name: '图片转Excel',
-    src: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/tool/p4.png',
+    src: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/tool/p4.png',
     index: 15
   },
   {
     name: '图片转PPT',
-    src: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/tool/p5.png',
+    src: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/tool/p5.png',
     index: 17
   },
   {
     name: '图片转PDF',
-    src: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/tool/p6.png',
+    src: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/tool/p6.png',
     index: 16
   },
   {
     name: '拼图',
-    src: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/tool/p7.png',
+    src: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/tool/p7.png',
     index: 13
   },
 ])
@@ -153,27 +171,27 @@ const pictures = ref([
 const pdfs = ref([
   {
     name: 'PDF转Word',
-    src: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/tool/d1.png',
+    src: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/tool/d1.png',
     url: 'type=pdf&channel=word'
   },
   {
     name: 'PDF转Excel',
-    src: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/tool/d2.png',
+    src: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/tool/d2.png',
     url: 'type=pdf&channel=excel'
   },
   {
-    name: 'PDF转PPT',
-    src: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/tool/d3.png',
-    url: 'type=pdf&channel=ppt'
-  },
-  {
     name: 'PDF转图片',
-    src: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/tool/d4.png',
+    src: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/tool/d3.png',
     url: 'type=pdf&channel=pic',
   },
   {
+    name: 'PDF转PPT',
+    src: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/tool/d4.png',
+    url: 'type=pdf&channel=ppt'
+  },
+  {
     name: 'PDF转长图',
-    src: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/tool/d5.png',
+    src: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/tool/d5.png',
     url: 'type=pdf&channel=longpic'
   },
 ])
@@ -202,17 +220,24 @@ const buyVip = () => {
 </script>
 <style lang="scss">
 page{
-  background: #F7F7F7;
+  background: linear-gradient(-1deg, #FAFAFA, #F7F6FF);
 }
 
 .h-card {
-  padding: 17rpx 20rpx !important;
-  background: #F9FAFC !important;
-  border-radius: 10rpx !important;
-  width: 100% !important;
+  padding: 0 14rpx !important;
+  background: #ffffff !important;
+  border-radius: 20rpx !important;
+  width: 214rpx !important;
+  height: 113rpx !important;
   margin: 0 !important;
   box-sizing: border-box;
   box-shadow: none !important;
+  display: flex;
+  align-items: center;
+
+  .wd-card__content {
+    width: 100%;
+  }
 }
 </style>
 <style scoped lang="scss">
@@ -226,15 +251,24 @@ page{
 .tool-grid{
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 20rpx;
-  margin-top: 0.8rem;
-  background: #ffffff;
-  padding: 20rpx;
-  border-radius: 10rpx;
+  gap: 14rpx;
+  margin:36rpx 0 29rpx;
+
+  &.tool-grid1 {
+    .d-flex {
+      image {
+        margin-right: 46rpx;
+      }
+    }
+  }
 
   .d-flex {
+    width: 100%;
     position: relative;
+
+    image {
+      flex-shrink: 0;
+    }
   }
 
   .hot {
@@ -245,7 +279,6 @@ page{
   }
 }
 .tool-card{
-  width: 315rpx;
   box-sizing: border-box;
 }
 </style>

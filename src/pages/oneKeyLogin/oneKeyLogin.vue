@@ -4,6 +4,7 @@
       <uni-icons type="left" size="30" @click="toBack" />
     </view>
 
+    <!-- TODO logo修改 -->
     <view class="logo-img">
       <wd-img
           width="147rpx"
@@ -28,13 +29,13 @@
 
       <view class="login" @click="login">一键登录</view>
       <view class="other-login" @click="toBack">其他手机号码登录</view>
+    </view>
 
-      <view class="login-agree" style="padding: 0 32rpx">
-        <wd-checkbox checked-color="rgba(35, 156, 247, 1)" size="large" v-model="radio"></wd-checkbox>
-        <view class="login-agree_text">
-          已阅读并同意
-          <view style="color: #239CF7" @click="toRouter(`/pages/vipProtocol/index`, `title=${encodeURIComponent('《用户服务及隐私协议》')}`)">《用户服务及隐私协议》</view>
-        </view>
+    <view class="login-agree" style="padding: 0 32rpx">
+      <wd-checkbox checked-color="#856BFF" size="large" v-model="radio"></wd-checkbox>
+      <view class="login-agree_text">
+        已阅读并同意
+        <view style="color: #239CF7" @click="toRouter(`/pages/vipProtocol/index`, `title=${encodeURIComponent('《用户服务及隐私协议》')}`)">《用户服务及隐私协议》</view>
       </view>
     </view>
   </view>
@@ -134,9 +135,9 @@ page {
     align-items: center;
 
     .input-box {
-      font-weight: 500;
-      font-size: 48rpx;
-      color: #1a1a1a;
+      font-weight: 600;
+      font-size: 44rpx;
+      color: #010101;
       margin-bottom: 92rpx;
     }
 
@@ -148,9 +149,9 @@ page {
       align-items: center;
       justify-content: center;
       margin-bottom: 29rpx;
-      border-radius: 16rpx;
-      background: #CDF022;
-      color: #030203;
+      border-radius: 50rpx;
+      background: #856BFF;
+      color: #ffffff;
       font-weight: 500;
       font-size: 32rpx;
       height: 100rpx;
@@ -163,17 +164,21 @@ page {
       color: #666666;
       margin-bottom: 37rpx;
     }
+  }
 
-    .login-agree{
+  .login-agree{
+    position: fixed;
+    bottom: 100rpx;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .login-agree_text{
+      color: #000000;
+      font-size: 22rpx;
       display: flex;
-      margin-top: 34rpx;
-      align-items: center;
-
-      .login-agree_text{
-        color: #030203;
-        font-size: 22rpx;
-        display: flex;
-      }
     }
   }
 }

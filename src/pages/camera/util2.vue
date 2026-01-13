@@ -56,32 +56,32 @@ const props = defineProps(['toolType'])
 const emits = defineEmits(['changeTab'])
 
 const lists = ref([
-  { name: '证件扫描', icon: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/camera/t1.png', index: 4 },
-  { name: '文字提取', icon: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/camera/t2.png', index: 5 },
-  { name: '文件扫描', icon: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/camera/t3.png', index: 6 },
-  { name: '拍照计数', icon: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/camera/t4.png', index: 7 },
-  { name: '手写文字识别', icon: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/camera/t5.png', index: 8 },
-  { name: '拍照翻译', icon: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/camera/t6.png', index: 9 },
-  { name: '试卷去手写', icon: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/camera/t7.png', index: 10 },
-  { name: '识别公式', icon: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/camera/t8.png', index: 11 },
+  { name: '证件扫描', icon: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/camera/t1.png', index: 4 },
+  { name: '文字提取', icon: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/camera/t2.png', index: 5 },
+  { name: '文件扫描', icon: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/camera/t3.png', index: 6 },
+  { name: '拍照计数', icon: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/camera/t4.png', index: 7 },
+  { name: '手写文字识别', icon: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/camera/t5.png', index: 8 },
+  { name: '拍照翻译', icon: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/camera/t6.png', index: 9 },
+  { name: '试卷去手写', icon: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/camera/t7.png', index: 10 },
+  { name: '识别公式', icon: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/camera/t8.png', index: 11 },
 ])
 
 const picts = ref([
-  { name: '图片加水印', icon: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/camera/g1.png', index: 12 },
-  { name: '图片去水印', icon: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/camera/g2.png', index: 18 },
-  { name: '图片转Word', icon: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/camera/g3.png', index: 14 },
-  { name: '图片转Excel', icon: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/camera/g4.png', index: 15 },
-  { name: '图片转PPT', icon: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/camera/g5.png', index: 17 },
-  { name: '图片转PDF', icon: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/camera/g6.png', index: 16 },
-  { name: '拼图', icon: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/camera/g7.png', index: 13 },
+  { name: '图片加水印', icon: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/camera/g1.png', index: 12 },
+  { name: '图片去水印', icon: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/camera/g2.png', index: 18 },
+  { name: '图片转Word', icon: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/camera/g3.png', index: 14 },
+  { name: '图片转Excel', icon: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/camera/g4.png', index: 15 },
+  { name: '图片转PPT', icon: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/camera/g5.png', index: 17 },
+  { name: '图片转PDF', icon: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/camera/g6.png', index: 16 },
+  { name: '拼图', icon: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/camera/g7.png', index: 13 },
 ])
 
 const pdfs = ref([
-  { name: 'PDF转Word', icon: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com//zhiyingsaoshi/camera/d1.png', url: 'type=pdf&channel=word' },
-  { name: 'PDF转表格', icon: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/camera/d2.png', url: 'type=pdf&channel=excel' },
-  { name: 'PDF转图片', icon: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/camera/d3.png', url: 'type=pdf&channel=ppt' },
-  { name: 'PDF转PPT', icon: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/camera/d4.png', url: 'type=pdf&channel=pic' },
-  { name: 'PDF转长图', icon: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/camera/d5.png', url: 'type=pdf&channel=longpic' },
+  { name: 'PDF转Word', icon: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com//new_scantools/camera/d1.png', url: 'type=pdf&channel=word' },
+  { name: 'PDF转表格', icon: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/camera/d2.png', url: 'type=pdf&channel=excel' },
+  { name: 'PDF转图片', icon: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/camera/d3.png', url: 'type=pdf&channel=ppt' },
+  { name: 'PDF转PPT', icon: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/camera/d4.png', url: 'type=pdf&channel=pic' },
+  { name: 'PDF转长图', icon: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/camera/d5.png', url: 'type=pdf&channel=longpic' },
 ])
 
 const toCamera = (item) => {
