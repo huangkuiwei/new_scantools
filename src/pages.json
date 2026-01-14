@@ -65,9 +65,7 @@
     {
       "path": "pages/tool/index",
       "style": {
-        "navigationStyle": "custom",
-        "navigationBarTitleText": "工具",
-        "navigationBarBackgroundColor": "#ffffff"
+        "navigationBarTitleText": "工具"
       }
     },
     {

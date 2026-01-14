@@ -5,8 +5,8 @@
         <view @click="toSwich(item.page)" v-show="!item.hidden">
           <view>
             <wd-img
-              width="22"
-              height="22"
+              width="17"
+              height="17"
               :src="item.index == props.index?item.select_icon:item.icon"
             ></wd-img>
           </view>
@@ -14,11 +14,11 @@
             {{ item.name }}
           </view>
         </view>
-        <view v-show="item.hidden">
-          <view @click="jump" class="navbar-camero">
-            <image class="camero" style="width: 80px" mode="widthFix" src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/tabbar/camero.png"></image>
-          </view>
-        </view>
+        <!-- <view v-show="item.hidden"> -->
+        <!--   <view @click="jump" class="navbar-camero"> -->
+        <!--     <image class="camero" style="width: 80px" mode="widthFix" src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/tabbar/camero.png"></image> -->
+        <!--   </view> -->
+        <!-- </view> -->
       </wd-grid-item>
     </wd-grid>
   </view>
@@ -35,32 +35,32 @@ const menus = ref([
     page: '/pages/index/index',
     name: '首页',
     index: 1,
-    icon: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/tabbar/icon_1.png',
-    select_icon: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/tabbar/icon_1_sel.png'
+    icon: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/tabbar/icon_1.png',
+    select_icon: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/tabbar/icon_1_sel.png'
   },
   {
     page: '/pages/document/index',
     name: '文档',
     index: 2,
-    icon: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/tabbar/icon_2.png',
-    select_icon: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/tabbar/icon_2_sel.png'
+    icon: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/tabbar/icon_2.png',
+    select_icon: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/tabbar/icon_2_sel.png'
   },
-  {
-    hidden: true
-  },
+  // {
+  //   hidden: true
+  // },
   {
     page: '/pages/tool/index',
     name: '工具',
     index: 3,
-    icon: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/tabbar/icon_3.png',
-    select_icon: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/tabbar/icon_3_sel.png'
+    icon: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/tabbar/icon_3.png',
+    select_icon: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/tabbar/icon_3_sel.png'
   },
   {
     page: '/pages/my/index',
     name: '我的',
     index: 4,
-    icon: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/tabbar/icon_4.png',
-    select_icon: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/tabbar/icon_4_sel.png'
+    icon: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/tabbar/icon_4.png',
+    select_icon: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/tabbar/icon_4_sel.png'
   }
 ])
 
@@ -108,17 +108,18 @@ const jump = () => {
   width: 100vw;
   bottom: 0;
   left: 0;
+  padding: 10rpx 0;
   background: #fff;
   box-shadow: 0 -1px 3px 3px #f7f7f7;
   overflow: visible;
   z-index: 999;
-  color: #A4A3AA;
+  color: #BFBFBF;
   .extra{
     overflow: visible;
   }
 }
 .active{
-  color: #212121;
+  color: #010101;
 }
 .navbar-camero{
   position: relative;

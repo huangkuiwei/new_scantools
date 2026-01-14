@@ -163,22 +163,30 @@ body{
 
   .count-info {
     position: absolute;
-    top: 500rpx;
+    top: 280rpx;
     left: 0;
     right: 0;
-    bottom: 0;
     text-align: center;
 
     .count-number {
       margin-bottom: 16rpx;
+      display: flex;
+      flex-direction: column;
 
       text {
-        color: #2F2F46;
-        font-size: 40rpx;
-        font-weight: bold;
+        font-weight: 600;
+        font-size: 35rpx;
+        color: #856BFF;
 
         &:nth-child(2) {
-          color: #E51616;
+          font-size: 62rpx;
+          margin-bottom: 20rpx;
+        }
+
+        &:nth-child(3) {
+          font-weight: 500;
+          font-size: 23rpx;
+          color: #272727;
         }
       }
     }
@@ -198,12 +206,12 @@ body{
 
   .close {
     text-align: right;
-    position: relative;
-    top: 260rpx;
-    right: 120rpx;
+    position: absolute;
+    bottom: -8rpx;
+    right: 340rpx;
 
     image {
-      width: 54rpx;
+      width: 46rpx;
     }
   }
 
@@ -219,7 +227,7 @@ body{
     z-index: 9;
 
     image {
-      width: 398rpx;
+      width: 335rpx;
     }
   }
 }
@@ -232,8 +240,8 @@ body{
 
 // 公共样式
 .wd-button.is-primary {
-  background: #CDF022 !important;
-  color: #212121 !important;
+  background: #856BFF !important;
+  color: #ffffff !important;
 }
 
 .wd-message-box__title {
