@@ -51,7 +51,7 @@ page {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 44rpx;
+    gap: 40rpx;
 
     .transform-item {
       width: 196rpx;

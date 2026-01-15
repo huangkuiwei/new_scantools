@@ -20,7 +20,7 @@
     {
       "path": "pages/index/index",
       "style": {
-        "navigationBarTitleText": "首页"
+        "navigationStyle": "custom"
       }
     },
     {
@@ -59,13 +59,13 @@
     {
       "path": "pages/document/index",
       "style": {
-        "navigationBarTitleText": "文档"
+        "navigationBarTitleText": ""
       }
     },
     {
       "path": "pages/tool/index",
       "style": {
-        "navigationBarTitleText": "工具"
+        "navigationBarTitleText": ""
       }
     },
     {

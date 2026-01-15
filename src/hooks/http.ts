@@ -1,6 +1,6 @@
 import { toRouter } from './utils'
 
-let baseApi = 'https://smapi.zyyttech.cn/'
+let baseApi = 'https://smapi.liwangtc.com/'
 let hasShowLoginModal = false
 
 const $http = {
@@ -66,7 +66,7 @@ const $http = {
 
                 uni.showModal({
                   title: '提示',
-                  content: '您当前未登录或登录已失效，为了您有更好的体验，智映扫视需要您进行登录',
+                  content: '您当前未登录或登录已失效，为了您有更好的体验，力网转印需要您进行登录',
                   showCancel: true,
                   success: (res) => {
                     hasShowLoginModal = false
@@ -161,7 +161,7 @@ const $http = {
 
                 uni.showModal({
                   title: '提示',
-                  content: '您当前未登录或登录已失效，为了您有更好的体验，智映扫视需要您进行登录',
+                  content: '您当前未登录或登录已失效，为了您有更好的体验，力网转印需要您进行登录',
                   showCancel: true,
                   success: (res) => {
                     hasShowLoginModal = false
@@ -243,7 +243,7 @@ const $http = {
 
                 uni.showModal({
                   title: '提示',
-                  content: '您当前未登录或登录已失效，为了您有更好的体验，智映扫视需要您进行登录',
+                  content: '您当前未登录或登录已失效，为了您有更好的体验，力网转印需要您进行登录',
                   showCancel: true,
                   success: (res) => {
                     hasShowLoginModal = false

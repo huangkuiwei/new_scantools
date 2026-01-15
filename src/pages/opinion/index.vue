@@ -15,14 +15,14 @@
             :header="{
               token: token
             }"
-            action="https://smapi.zyyttech.cn/api/global/fileupload/upload"
+            action="https://smapi.liwangtc.com/api/global/fileupload/upload"
         >
           <view class="upload-box">+</view>
         </wd-upload>
       </view>
     </wd-card>
     <view class="font-tip">
-      您的反馈我们会尽快解决，但无法保证每一条都能及时受理。如果有紧急咨询， 请直接拨打客服电话：400-000-0000
+      您的反馈我们会尽快解决，但无法保证每一条都能及时受理。如果有紧急咨询，请联系小程序客服
     </view>
   </view>
   <view class="opinion-btn">
@@ -46,7 +46,7 @@ const token = ref(uni.getStorageSync('toolsToken'))
 onShareAppMessage(() => {
   return {
     title: '高清电子文档一键转换',
-    imageUrl: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/share2.jpg',
+    imageUrl: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/share.png',
     path: '/pages/index/index',
   }
 })

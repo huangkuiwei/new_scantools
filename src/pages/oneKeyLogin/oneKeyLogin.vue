@@ -7,16 +7,9 @@
     <!-- TODO logo修改 -->
     <view class="logo-img">
       <wd-img
-          width="147rpx"
-          height="140rpx"
-          src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/login/logo.png"
-      ></wd-img>
-
-      <wd-img
-          v-if="loginType === 0"
-          width="357rpx"
-          height="51rpx"
-          src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/login/logo2.png"
+          width="183rpx"
+          height="183rpx"
+          src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/logo.png"
       ></wd-img>
     </view>
 
@@ -63,7 +56,7 @@ export default {
   onShareAppMessage() {
     return {
       title: '高清电子文档一键转换',
-      imageUrl: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/share2.jpg',
+      imageUrl: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/share.png',
       path: '/pages/index/index',
     };
   },

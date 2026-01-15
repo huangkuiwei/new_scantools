@@ -1,5 +1,5 @@
 {
-    "name": "新扫描小程序",
+    "name": "力网转印",
     "appid": "",
     "description": "",
     "versionName": "1.0.0",
@@ -46,7 +46,7 @@
             "sdkConfigs": {
                 "share" : {
                     "weixin" : {
-                        "appid" : "wx7493deda5f7a66b3",
+                        "appid" : "wx5ce35be8ba5e895b",
                         "UniversalLinks" : "https://tools-api.xiaoohui.com"
                     }
                 }
@@ -57,7 +57,7 @@
     "quickapp": {},
     /* 小程序特有相关 */
     "mp-weixin": {
-        "appid": "wx7493deda5f7a66b3",
+        "appid": "wx5ce35be8ba5e895b",
         "setting": {
             "urlCheck": false,
             "request": "https://tools-api.xiaoohui.com"

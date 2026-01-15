@@ -46,7 +46,7 @@
               <view class="span"> 提取文字 </view>
             </view>
 
-            <view class="card-grid-wrapper" @click="$toRouter('/pages/picTransform/picTransform')">
+            <view class="card-grid-wrapper" @click="toRouter('/pages/picTransform/picTransform')">
               <view class="card-grid_li">
                 <wd-img
                     height="27"
@@ -57,7 +57,7 @@
               <view class="span"> 图片转换 </view>
             </view>
 
-            <view class="card-grid-wrapper" @click="$toRouter('/pages/pdfTransform/pdfTransform')">
+            <view class="card-grid-wrapper" @click="toRouter('/pages/pdfTransform/pdfTransform')">
               <view class="card-grid_li">
                 <wd-img
                     height="27"
@@ -427,7 +427,7 @@ onShow(() => {
 onShareAppMessage(() => {
   return {
     title: '高清电子文档一键转换',
-    imageUrl: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/zhiyingsaoshi/share2.jpg',
+    imageUrl: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/share.png',
     path: '/pages/index/index',
   }
 })
@@ -460,7 +460,7 @@ const search = () => {
   if (!user.value.uid) {
     uni.showModal({
       title: '提示',
-      content: '您当前未登录或登录已失效，为了您有更好的体验，智映扫视需要您进行登录',
+      content: '您当前未登录或登录已失效，为了您有更好的体验，力网转印需要您进行登录',
       showCancel: true,
       success: (res) => {
         if (res.confirm) {
@@ -797,7 +797,7 @@ const goPreview = (item) => {
 
 <style lang="scss">
 page {
-  background: #FAFAFA url("https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/index/bg01.png") left top/100% auto no-repeat;
+  background: #FAFAFA url("https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/index/bg04.png") left top/100% auto no-repeat;
   padding-bottom: 200rpx;
 }
 </style>
@@ -848,8 +848,8 @@ page {
 }
 
 .index-header {
-  height: 324rpx;
-  background: url("https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/index/bg02.png") left top -110rpx/100% auto no-repeat;
+  height: 435rpx;
+  background: url("https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/index/bg05.png") left 66rpx top 260rpx/310rpx auto no-repeat;
 }
 
 .box {
