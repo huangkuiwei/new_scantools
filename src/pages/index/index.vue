@@ -1041,10 +1041,13 @@ page {
     gap: 40rpx;
 
     .empty {
-      padding: 80rpx 0;
+      padding: 0 0 80rpx;
       display: flex;
       align-items: center;
       justify-content: center;
+      position: relative;
+      top: -40rpx;
+
       .empty-box {
         display: flex;
         flex-direction: column;

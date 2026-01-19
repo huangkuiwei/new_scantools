@@ -89,7 +89,7 @@ t<template>
   <wd-popup
       :closable="false"
       :modelValue="countTipDialog"
-      custom-style="width: 700rpx; background: transparent; top: calc(50vh - 600rpx); margin: 0 auto;"
+      custom-style="width: 700rpx; background: transparent; top: calc(50vh - 500rpx); margin: 0 auto;"
       position="top"
       :z-index="99999"
   >

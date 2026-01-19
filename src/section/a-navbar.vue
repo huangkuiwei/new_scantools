@@ -4,11 +4,7 @@
       <wd-grid-item :custom-class="item.hidden?'extra':''" v-for="(item,index) in menus" :key="index" icon="goods" :use-slot="true">
         <view @click="toSwich(item.page)" v-show="!item.hidden">
           <view>
-            <wd-img
-              width="17"
-              height="17"
-              :src="item.index == props.index?item.select_icon:item.icon"
-            ></wd-img>
+            <image class="icon" style="height: 32rpx" mode="heightFix" :src="item.index == props.index?item.select_icon:item.icon"/>
           </view>
           <view style="font-size: 0.8rem;" :class="{'active': item.index == props.index}">
             {{ item.name }}
