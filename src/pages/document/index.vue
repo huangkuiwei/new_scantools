@@ -48,7 +48,7 @@
           <text class="title">所有文档</text>
           <text style="flex-grow: 1"></text>
 
-          <view class="options">
+          <view class="options1">
             <image @click="showAddDicDialog = true" mode="heightFix" src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/document/icon01.png"/>
             <image @click="selectFile1" mode="heightFix" src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/document/icon02.png"/>
           </view>
@@ -1577,13 +1577,14 @@ page {
         color: #1F1F1F;
       }
 
-      .options {
+      .options1 {
         display: flex;
         align-items: center;
         gap: 44rpx;
 
         image {
           height: 34rpx;
+          width: auto;
         }
       }
     }
