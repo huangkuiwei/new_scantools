@@ -31,15 +31,15 @@ const menus = ref([
     page: '/pages/index/index',
     name: '首页',
     index: 1,
-    icon: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/tabbar/icon_1.png',
-    select_icon: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/tabbar/icon_1_sel.png'
+    icon: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/tabbar/icon_1.png?t=123',
+    select_icon: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/tabbar/icon_1_sel.png?t=123'
   },
   {
     page: '/pages/document/index',
     name: '文档',
     index: 2,
-    icon: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/tabbar/icon_2.png',
-    select_icon: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/tabbar/icon_2_sel.png'
+    icon: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/tabbar/icon_2.png?t=123',
+    select_icon: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/tabbar/icon_2_sel.png?t=123'
   },
   // {
   //   hidden: true
@@ -48,15 +48,15 @@ const menus = ref([
     page: '/pages/tool/index',
     name: '工具',
     index: 3,
-    icon: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/tabbar/icon_3.png',
-    select_icon: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/tabbar/icon_3_sel.png'
+    icon: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/tabbar/icon_3.png?t=123',
+    select_icon: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/tabbar/icon_3_sel.png?t=123'
   },
   {
     page: '/pages/my/index',
     name: '我的',
     index: 4,
-    icon: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/tabbar/icon_4.png',
-    select_icon: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/tabbar/icon_4_sel.png'
+    icon: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/tabbar/icon_4.png?t=123',
+    select_icon: 'https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/tabbar/icon_4_sel.png?t=123'
   }
 ])
 

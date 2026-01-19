@@ -49,8 +49,8 @@
           <text style="flex-grow: 1"></text>
 
           <view class="options">
-            <image @click="showAddDicDialog = true" mode="widthFix" src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/document/icon01.png"/>
-            <image @click="selectFile1" mode="widthFix" src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/document/icon02.png"/>
+            <image @click="showAddDicDialog = true" mode="heightFix" src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/document/icon01.png"/>
+            <image @click="selectFile1" mode="heightFix" src="https://hnenjoy.oss-cn-shanghai.aliyuncs.com/new_scantools/document/icon02.png"/>
           </view>
         </view>
 
@@ -1583,7 +1583,7 @@ page {
         gap: 44rpx;
 
         image {
-          width: 30rpx;
+          height: 34rpx;
         }
       }
     }
