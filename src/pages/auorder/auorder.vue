@@ -3,7 +3,7 @@
     <view class="qyhywx-page-wrap"></view>
     <view class="mask" @click="confirmReceive"></view>
     <uni-popup ref="checkConfirmDialog" maskBackgroundColor="rgba(0, 0, 0, 0.5)">
-      <view class="check-confirm-dialog">
+      <view class="check-confirm-dialog" @click="confirmReceive">
         <view class="check-content">
           <view class="buy">
             <image
@@ -91,7 +91,7 @@ export default {
       });
 
       $http
-          .post(`https://sspi.zyyttech.cn/api/microapp/order/we_h5/createordernew`, {
+          .post(`https://xapi.liwangtc.com/api/microapp/order/we_h5/createordernew`, {
             mobile: this.mobile,
             url: decodeURIComponent(this.shurl),
             openid: this.openId,
@@ -155,7 +155,7 @@ export default {
 
       uni.request({
         method: 'GET',
-        url: `https://sspi.zyyttech.cn/api/business/ali_sign/au_order/${this.queryO}`,
+        url: `https://xapi.liwangtc.com/api/business/ali_sign/au_order/${this.queryO}`,
         success: (res) => {
           if (res.data.code === 0 || res.data.Code === 0) {
             let sign_order_no = res.header.sign_order_no
